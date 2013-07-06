@@ -1,16 +1,13 @@
-[TodoMVC](http://todomvc.com/) in [Ember](http://emberjs.com/guides/getting-started/) using [Lineman](https://github.com/testdouble/lineman)
+Write a 5k!
 ======
 
-This is an exercise in adapting and extending the example app from the [Ember Guide](http://emberjs.com/guides/getting-started/) to use [Lineman](https://github.com/testdouble/lineman).
+A simple application that has some similarities to ficly.com.  You can write a story of up to five thousand characters (thus, "Write a 5k!"), and then create a sequel or prequel to any story.
 
-I worked through the tutorial to learn Ember, but wanted to explore a bit more with CoffeeScript and separating the templates.  A little investigation turned up Lineman to handle the pre-compilation of the templates and CoffeeScript. Lineman's ability to push up to Heroku was a plus, as I am eventually planning on writing another app in Ember with a Rails backend, and treating the Ember frontend and the Rails backend as separate apps was a good idea.
+I grabbed the skeleton from my [TodoMVC tutorial using Lineman](https://github.com/rwalters/TodoMVCLineman) application.
 
 NOTES
 -----
-You have to follow the instructions on the Lineman page set up Node.JS and other dependencies.  I have slightly modified the ```config/files.coffee``` to load the JavaScript and CoffeeScript files in the correct order.
+This is written in Ember with Lineman to precompile everything.
 
-TODO
------
- * ~~Finish converting .js files to .coffee files.~~
- * Break index.html into separate .hb templates.
- * Add tests to be run by lineman
+You have to follow the instructions on the [Lineman](https://github.com/testdouble/lineman) page set up Node.JS and other dependencies.  I have slightly modified the ```config/files.coffee``` to load the JavaScript and CoffeeScript files in the correct order.
+
