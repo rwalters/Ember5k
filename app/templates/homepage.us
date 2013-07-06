@@ -6,68 +6,69 @@
   <link rel="stylesheet" type="text/css" href="<%= css %>" media="all" />
 </head>
 <body>
-  <script type="text/x-handlebars" data-template-name="todos/index">
-    <ul id="todo-list">
-      {{#each controller itemController="todo"}}
-      <li {{bindAttr class="isCompleted:completed isEditing:editing"}}>
-        {{#if isEditing}}
-        {{view Todos.EditTodoView valueBinding="title"}}
-        {{else}}
-        {{view Ember.Checkbox checkedBinding="isCompleted" class="toggle"}}
-        <label {{action "editTodo" on="doubleClick"}}>{{title}}</label><button {{action "removeTodo"}} class="destroy"></button>
-        {{/if}}
-      </li>
-      {{/each}}
-    </ul>
+  <script type="text/x-handlebars">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="#">Write5K</a>
+        <ul class="nav">
+          <li><a href="#">Story List</a></li>
+          <li><a href="#">New Story</a></li>
+        </ul>
+      </div>
+    </div>
+
+    {{outlet}}
   </script>
 
-  <script type="text/x-handlebars" data-template-name="todos">
+  <script type="text/x-handlebars" data-template-name="stories">
+    <div class="container-fluid">
+      <div class="row-fluid">
+        <div class="span2">
+          <table class="table">
+            <thead>
+              <tr><th>Recent Posts</th></tr>
+            </thead>
+            <tr><td>
+                <a href="#">First Story</a>
+            </td></tr>
+            <tr><td>
+                <a href="#">Second Story</a>
+            </td></tr>
+          </table>
+        </div>
+        <div class="span10">
+          <div class="span10">
+            <ul class="nav nav-pills pull-right">
+              <li class="active"><a href="#">Read</a></li>
+              <li><a href="#">Edit</a></li>
+            </ul>
+          </div>
 
-  <section id="storyapp">
-    <header id="header">
-      <h1>stories</h1>
-      {{view Ember.TextArea
-          id="new-story"
-          rows=20
-          maxlength=5000
-          placeholder="Just write"
-          valueBinding="newStory" action="createStory"}}
-    </header>
+          <div class="span10" id="read-pane">
+            <h1>First Story</h1>
 
-    <section id="main">
-      {{outlet}}
+            <hr>
 
-      {{view Ember.Checkbox id="toggle-all" checkedBinding="allAreDone"}}
-    </section>
+            <div class="below-the-fold">
+              Story content here.
+              I *want* to write some example content, but don't want to spend too much time.  I'll add some Markdown in the text here, so that when the parser is introduced we'll have something to go off of. **Hello there** for ***example***. For now, this will all end up squished together.
+              But now I don't have much else to say, so I will do some free writing for a while. I am writing this up to have a little sample app to show off, though this won't be all that exciting to start with. I intend to have a live show of the translation of the markdown, and hopefully a progress bar that pops up at the top to so how much writing has been done and how far there is to go to the 5k limit.  `Do I want an actual 5*1024=5120, or just the 5000?` I'll wait and see how things look, maybe.
+            </div>
 
-    <footer id="footer">
-      <span id="todo-count"><strong>{{remaining}}</strong> {{inflection}} left</span>
+            <hr>
 
-      <ul id="filters">
-        <li>
-          {{#linkTo todos.index activeClass="selected"}}All{{/linkTo}}
-        </li>
-        <li>
-          {{#linkTo todos.active activeClass="selected"}}Active{{/linkTo}}
-        </li>
-        <li>
-          {{#linkTo todos.completed activeClass="selected"}}Completed{{/linkTo}}
-        </li>
-      </ul>
-
-      {{#if hasCompleted}}
-      <button id="clear-completed" {{action "clearCompleted"}}>
-        Clear completed ({{completed}})
-      </button>
-      {{/if}}
-    </footer>
-  </section>
-
-  <footer id="info">
-    <p>Double-click to edit a todo</p>
-  </footer>
-
+            <div class="btn-group pull-left">
+              <button class="btn">< Create Prequel</button>
+            </div>
+            <div class="btn-group pull-right">
+              <button class="btn">Create Sequel ></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </script>
+
   <script type="text/javascript" src="<%= js %>"></script>
 </body>
 </html>
