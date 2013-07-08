@@ -11,7 +11,7 @@
       <div class="navbar-inner">
         <a class="brand" href="#">Write5K</a>
         <ul class="nav">
-          <li><a href="#">Story List</a></li>
+          <li>{{#linkTo stories}}Story List{{/linkTo}}</li>
           <li><a href="#">New Story</a></li>
         </ul>
       </div>
@@ -28,15 +28,25 @@
             <thead>
               <tr><th>Recent Posts</th></tr>
             </thead>
+            {{#each controller}}
             <tr><td>
-                <a href="#">First Story</a>
+                {{#linkTo 'story' this}}{{title}}{{/linkTo}}
             </td></tr>
-            <tr><td>
-                <a href="#">Second Story</a>
-            </td></tr>
+            {{/each}}
           </table>
         </div>
         <div class="span10">
+          {{outlet}}
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="stories/index">
+    <p class="text-warning">Please select a story</p>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="story">
           <div class="span10">
             <ul class="nav nav-pills pull-right">
               <li class="active"><a href="#">Read</a></li>
@@ -45,14 +55,13 @@
           </div>
 
           <div class="span10" id="read-pane">
-            <h1>First Story</h1>
+            <h1>{{title}}</h1>
+            <em class="muted">by {{author}}</em>
 
             <hr>
 
             <div class="below-the-fold">
-              Story content here.
-              I *want* to write some example content, but don't want to spend too much time.  I'll add some Markdown in the text here, so that when the parser is introduced we'll have something to go off of. **Hello there** for ***example***. For now, this will all end up squished together.
-              But now I don't have much else to say, so I will do some free writing for a while. I am writing this up to have a little sample app to show off, though this won't be all that exciting to start with. I intend to have a live show of the translation of the markdown, and hopefully a progress bar that pops up at the top to so how much writing has been done and how far there is to go to the 5k limit.  `Do I want an actual 5*1024=5120, or just the 5000?` I'll wait and see how things look, maybe.
+              {{markdown body}}
             </div>
 
             <hr>
@@ -64,9 +73,6 @@
               <button class="btn">Create Sequel ></button>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
   </script>
 
   <script type="text/javascript" src="<%= js %>"></script>
