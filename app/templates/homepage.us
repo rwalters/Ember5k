@@ -18,6 +18,8 @@
     </div>
 
     {{outlet}}
+    <hr>
+    <center><em class="muted">Created by Ray</em></center>
   </script>
 
   <script type="text/x-handlebars" data-template-name="stories">
@@ -42,39 +44,68 @@
     </div>
   </script>
 
+  <script type="text/x-handlebars" data-template-name="index">
+    <div>
+      <center><h1 class="muted">Write and be merry!</h1></center>
+    </div>
+  </script>
+
   <script type="text/x-handlebars" data-template-name="stories/index">
     <p class="text-warning">Please select a story</p>
   </script>
 
   <script type="text/x-handlebars" data-template-name="story">
-          <div class="span10">
-            <ul class="nav nav-pills pull-right">
-              <li class="active"><a href="#">Read</a></li>
-              <li><a href="#">Edit</a></li>
-            </ul>
-          </div>
+    {{partial "story/header_nav"}}
 
-          <div class="span10" id="read-pane">
-            <h1>{{title}}</h1>
-            <em class="muted">by {{author}}</em>
+    <div id="read-pane">
+      {{#if isEditing}}
+        {{partial "story/editing"}}
+      {{else}}
+        {{partial "story/reading"}}
+      {{/if}}
 
-            <hr>
+      <hr>
 
-            <div class="below-the-fold">
-              {{markdown body}}
-            </div>
-
-            <hr>
-
-            <div class="btn-group pull-left">
-              <button class="btn">< Create Prequel</button>
-            </div>
-            <div class="btn-group pull-right">
-              <button class="btn">Create Sequel ></button>
-            </div>
-          </div>
+      {{partial "story/footer_nav"}}
+    </div>
   </script>
 
+  <script type="text/x-handlebars" data-template-name="story/_header_nav">
+    <div>
+      <ul class="nav nav-pills pull-right">
+        <li {{bindAttr class="isEditing::active"}}><a href='#' {{action "acceptChanges"}}>Read</a></li>
+        <li {{bindAttr class="isEditing:active"}}><a href='#' {{action "editStory"}}>Edit</a></li>
+      </ul>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="story/_footer_nav">
+    <div class="btn-group pull-left">
+      <button class="btn">< Create Prequel</button>
+    </div>
+    <div class="btn-group pull-right">
+      <button class="btn">Create Sequel ></button>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="story/_reading">
+      <h1>{{title}}</h1>
+      <em class="muted">by {{author}}</em>
+
+      <hr>
+
+      <div class="below-the-fold">
+        {{markdown body}}
+      </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="story/_editing">
+    <p><label>Title</label>{{view Ember.TextField valueBinding="title" placeholder="Dandelion Wine"}}</p>
+    <p><label>Author</label>{{view Ember.TextField valueBinding="author" placeholder="Ray Bradbury"}}</p>
+    <p><label>Story</label>
+      {{view Ember.TextArea rows="20" valueBinding="body" placeholder="*It was a quiet morning*, the town covered over with darkness and at ease in bed."}}
+    </p>
+  </script>
   <script type="text/javascript" src="<%= js %>"></script>
 </body>
 </html>
