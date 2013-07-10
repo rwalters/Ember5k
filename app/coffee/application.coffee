@@ -1,4 +1,6 @@
-window.Write5k = Ember.Application.create()
+window.Write5k = Ember.Application.create
+  LOG_TRANSITIONS: true
+  LOG_BINDINGS: true
 
 showdown = new Showdown.converter()
 
