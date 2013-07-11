@@ -80,11 +80,21 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="story/_footer_nav">
-    <div class="btn-group pull-left">
-      <button class="btn">< Create Prequel</button>
+    <div class="span5 pull-left">
+      <ul class="nav nav-list">
+        {{#each story in prequels}}
+        {{partial "story/links"}}
+        {{/each}}
+        <li><a href="#">< Create Prequel</a></li>
+      </ul>
     </div>
-    <div class="btn-group pull-right">
-      <button class="btn">Create Sequel ></button>
+    <div class="span5 pull-right">
+      <ul class="nav nav-list text-right">
+        {{#each story in sequels}}
+        {{partial "story/links"}}
+        {{/each}}
+        <li><a href="#">Create Sequel ></a></li>
+      </ul>
     </div>
   </script>
 
@@ -100,11 +110,17 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="story/_editing">
-    <p><label>Title</label>{{view Ember.TextField valueBinding="title" placeholder="Dandelion Wine"}}</p>
-    <p><label>Author</label>{{view Ember.TextField valueBinding="author" placeholder="Ray Bradbury"}}</p>
-    <p><label>Story</label>
-      {{view Ember.TextArea rows="20" valueBinding="body" placeholder="*It was a quiet morning*, the town covered over with darkness and at ease in bed."}}
+    <p><h4>Title</h4>{{view Ember.TextField valueBinding="title" placeholder="Dandelion Wine" class="span4"}}</p>
+    <p><h4>Author</h4>{{view Ember.TextField valueBinding="author" placeholder="Ray Bradbury" class="span4"}}</p>
+    <p><h4>Story</h4>
+      <small class="muted">We use Markdown. <a href="http://daringfireball.net/projects/markdown/basics">Click to find out more</a>.</small>
+      <br>
+      {{view Ember.TextArea rows="20" valueBinding="body" placeholder="*It was a quiet morning*, the town covered over with darkness and at ease in bed." class="span10" maxlength=5000}}
     </p>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="story/_links">
+    <li>{{#linkTo 'story' story}}{{story.title}}{{/linkTo}}</li>
   </script>
 
   <script type="text/x-handlebars" data-template-name="create_story">
