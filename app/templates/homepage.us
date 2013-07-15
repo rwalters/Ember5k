@@ -18,8 +18,9 @@
     </div>
 
     {{outlet}}
-    <hr>
-    <center><em class="muted">Created by Ray</em></center>
+    <footer>
+    <h6 class="text-center muted"><em>Created by Ray</em></h6>
+    </footer>
   </script>
 
   <script type="text/x-handlebars" data-template-name="stories">
@@ -46,7 +47,7 @@
 
   <script type="text/x-handlebars" data-template-name="index">
     <div>
-      <center><h1 class="muted">Write and be merry!</h1></center>
+      <h1 class="text-center muted">Write and be merry!</h1>
     </div>
   </script>
 
@@ -73,7 +74,7 @@
   <script type="text/x-handlebars" data-template-name="story/_header_nav">
     <div>
       <ul class="nav nav-pills pull-right">
-        <li {{bindAttr class="isEditing::active"}}><a href='#' {{action "acceptChanges"}}>Read</a></li>
+        <li {{bindAttr class="isEditing::active"}}><a href='#' {{action "acceptChanges"}}>{{#if isEditing}}Save{{else}}Read{{/if}}</a></li>
         <li {{bindAttr class="isEditing:active"}}><a href='#' {{action "editStory"}}>Edit</a></li>
       </ul>
     </div>
@@ -110,9 +111,11 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="story/_editing">
-    <p><h4>Title</h4>{{view Ember.TextField valueBinding="title" placeholder="Dandelion Wine" class="span4"}}</p>
-    <p><h4>Author</h4>{{view Ember.TextField valueBinding="author" placeholder="Ray Bradbury" class="span4"}}</p>
-    <p><h4>Story</h4>
+    <p>{{view Ember.TextField valueBinding="title" placeholder="Dandelion Wine" class="span4"}}</p>
+    <p><em class="muted">by </em>{{view Ember.TextField valueBinding="author" placeholder="Ray Bradbury" class="span4"}}</p>
+    <p>
+
+      <hr>
       <small class="muted">We use Markdown. <a href="http://daringfireball.net/projects/markdown/basics">Click to find out more</a>.</small>
       <br>
       {{view Ember.TextArea rows="20" valueBinding="body" placeholder="*It was a quiet morning*, the town covered over with darkness and at ease in bed." class="span10" maxlength=5000}}
